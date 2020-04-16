@@ -1,5 +1,10 @@
 <template>
   <div>
+      <b-navbar variant="dark" type="dark">
+    <b-navbar-brand>
+      Die Stämme Ressourcen Manager
+    </b-navbar-brand>
+  </b-navbar>
     <b-card-group deck>
       <b-card :title="amount.label"  v-for="amount in amounts" :key="amount.type">
         <b-card-text>{{ amount.description }}</b-card-text>
@@ -50,7 +55,7 @@
 
     <hr />
     <b-card-group>
-<b-card style="margin-right:5%; margin-left:5%" bg-variant="dark" text-variant="white" title="Dauer bis zu den notwendigen Rohstoffen:">
+<b-card bg-variant="dark" text-variant="white" title="Dauer bis zu den notwendigen Rohstoffen:">
   <b-card-text>
         <table class="resultTable" style="width: 100%">
           <tr v-for="resource in result.timeToCompletion" :key="resource.type">
@@ -59,10 +64,11 @@
           </tr>
         </table>
   </b-card-text>
-  <b-button href="#" variant="primary">Reset</b-button>
 </b-card>
-<br>
-<b-card style="margin-right:5%; margin-left:5%" bg-variant="dark" text-variant="white" title="Überproduktion bis zur letzten Ressource:">
+
+<img src="https://dsde.innogamescdn.com/asset/cc7606f/graphic/start2/bg-paladin.png" style="margin-left: 2%; margin-right:2%">
+
+<b-card bg-variant="dark" text-variant="white" title="Überproduktion bis zur letzten Ressource:">
   <b-card-text>
         <table class="resultTable" style="width: 100%">
           <tr v-for="resource in result.overproduction" :key="resource.type">

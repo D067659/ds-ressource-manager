@@ -90,36 +90,31 @@
   border-collapse: collapse;
   width: 50%;
 }
-
-
 </style>
 <script>
-//import HelloWorld from './components/HelloWorld';
 
 export default {
   name: "App",
-
-  components: {
-    // HelloWorld,
-  },
   methods: {
      capitalizeFLetter: function(resource) { 
        return resource[0].toUpperCase() + resource.slice(1); 
     }, 
 
-    decimalToHoursAndMins: function(decimal) {
-      if (decimal == undefined || decimal < 0) return;
-      var hours = Math.floor(decimal / 60);  
-      var minutes = decimal % 60;
-      return hours + " Stunden und " + Math.round(minutes) + " Minuten";  
+    decimalToHoursAndMins: function(hours) {
+      var sign = hours < 0 ? "-" : "";
+      var hour = Math.floor(Math.abs(hours));
+      var min = Math.floor((Math.abs(hours) * 60) % 60);
+      return sign + (hour < 10 ? "0" : "") + hour + ":" + (min < 10 ? "0" : "") + min;
     },
+
     onCalculateDiff: function() {
       localStorage.amounts = JSON.stringify(this.amounts)
       this.result.timeToCompletion.forEach(resource => {
         resource.timeNeeded = this.calculateTimeFor(resource.type)
       });
-      
-      const sortesResources = this.result.timeToCompletion.sort((a, b) => b.timeNeeded - a.timeNeeded)
+
+      const cloneTimeCompletion = [...this.result.timeToCompletion];
+      const sortesResources = cloneTimeCompletion.sort((a, b) => b.timeNeeded - a.timeNeeded)
       const maxDurationResource = sortesResources[0];
 
       this.result.overproduction.forEach(resource => {

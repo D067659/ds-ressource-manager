@@ -10,7 +10,10 @@
               <strong>:</strong>
             </td>
             <td>
-              <b-input v-on:change="onCalculateDiff()" v-model="amount.holz" style="margin-left: 10%"></b-input>
+              <b-input-group>
+                <b-input v-on:change="onCalculateDiff()" v-model="amount.holz" style="margin-left: 10%"></b-input>
+                <b-button v-on:click="amount.holz *= 1000; onCalculateDiff()" variant="outline-success"><strong>K</strong></b-button>
+              </b-input-group>
             </td>
           </tr>
           <tr>
@@ -19,7 +22,10 @@
               <strong>:</strong>
             </td>
             <td>
-              <b-input v-on:change="onCalculateDiff()" v-model="amount.lehm" style="margin-left: 10%"></b-input>
+              <b-input-group>
+                <b-input v-on:change="onCalculateDiff()" v-model="amount.lehm" style="margin-left: 10%"></b-input>
+                <b-button v-on:click="amount.lehm *= 1000; onCalculateDiff()" variant="outline-success"><strong>K</strong></b-button>
+              </b-input-group>
             </td>
           </tr>
           <tr>
@@ -28,27 +34,47 @@
               <strong>:</strong>
             </td>
             <td>
-              <b-input v-on:change="onCalculateDiff()" v-model="amount.eisen" style="margin-left: 10%"></b-input>
+              <b-input-group>
+                <b-input v-on:change="onCalculateDiff()" v-model="amount.eisen" style="margin-left: 10%"></b-input>
+                <b-button v-on:click="amount.eisen *= 1000; onCalculateDiff()" variant="outline-success"><strong>K</strong></b-button>
+              </b-input-group>
             </td>
           </tr>
         </table>
+        <div v-if="amount.type == 'amountNeeded'" style="margin-top:2%">
+          <b-button v-on:click="amount.holz='40000'; amount.lehm='50000'; amount.eisen='50000'; onCalculateDiff()" variant="outline-primary" style="margin-left: 5%; margin-right: 3%"><b-icon icon="award"></b-icon> Adelsgeschlecht</b-button>
+          <b-button v-on:click="amount.holz='28000'; amount.lehm='30000'; amount.eisen='25000'; onCalculateDiff()" variant="outline-primary"><b-icon icon="life-preserver"></b-icon> Goldmünze</b-button>        
+        </div>
       </b-card>
     </b-card-group>
 
     <hr />
-
-<b-card bg-variant="dark" text-variant="white" title="Überproduktion bis zur letzten Ressource:">
+    <b-card-group>
+<b-card style="margin-right:5%; margin-left:5%" bg-variant="dark" text-variant="white" title="Dauer bis zu den notwendigen Rohstoffen:">
   <b-card-text>
-        <table class="resultTable" style="width:100%" >
-          <tr v-for="resource in result.overproduction" :key="resource.type">
+        <table class="resultTable" style="width: 100%">
+          <tr v-for="resource in result.timeToCompletion" :key="resource.type">
             <td style="font-size:40px; ">{{ capitalizeFLetter(resource.type) }}:</td>
-            <td style="font-size:40px; text-align:right">{{ resource.amount }}</td>
-            <td style="font-size:40px; color:red; padding-left:5%"><strong  v-if="resource.amount == 0">VERURSACHT ENGPASS</strong></td>
+            <td style="font-size:40px; text-align:right">{{ decimalToHoursAndMins(resource.timeNeeded) }}</td>
           </tr>
         </table>
   </b-card-text>
   <b-button href="#" variant="primary">Reset</b-button>
 </b-card>
+<br>
+<b-card style="margin-right:5%; margin-left:5%" bg-variant="dark" text-variant="white" title="Überproduktion bis zur letzten Ressource:">
+  <b-card-text>
+        <table class="resultTable" style="width: 100%">
+          <tr v-for="resource in result.overproduction" :key="resource.type">
+            <td style="font-size:40px; ">{{ capitalizeFLetter(resource.type) }}:</td>
+            <td style="font-size:40px; text-align:right">{{ resource.amount }}</td>
+            <td style="font-size:20px; color:red; padding-left:5%; width: 100%"><strong  v-if="resource.amount == 0">VERURSACHT ENGPASS</strong></td>
+          </tr>
+        </table>
+  </b-card-text>
+</b-card>
+    </b-card-group>
+
 
   </div>
 </template>
@@ -74,7 +100,13 @@ export default {
      capitalizeFLetter: function(resource) { 
        return resource[0].toUpperCase() + resource.slice(1); 
     }, 
-    
+
+    decimalToHoursAndMins: function(decimal) {
+      if (decimal == undefined || decimal < 0) return;
+      var hours = Math.floor(decimal / 60);  
+      var minutes = decimal % 60;
+      return hours + " Stunden und " + Math.round(minutes) + " Minuten";  
+    },
     onCalculateDiff: function() {
       localStorage.amounts = JSON.stringify(this.amounts)
       this.result.timeToCompletion.forEach(resource => {
@@ -180,6 +212,7 @@ export default {
     mounted() {
     if (localStorage.amounts) {
       this.amounts = JSON.parse(localStorage.amounts)
+      this.onCalculateDiff()
     } else {
       this.amounts = this.amount_template
     } 

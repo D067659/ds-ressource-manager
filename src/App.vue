@@ -55,7 +55,7 @@
 
     <hr />
     <b-card-group>
-<b-card bg-variant="dark" text-variant="white" title="Dauer bis zu den notwendigen Rohstoffen:">
+<b-card bg-variant="dark" text-variant="white" title="Dauer bis zu den notwendigen Rohstoffen (in hh:mm):">
   <b-card-text>
         <table class="resultTable" style="width: 100%">
           <tr v-for="resource in result.timeToCompletion" :key="resource.type">
@@ -68,7 +68,7 @@
 
 <img src="https://dsde.innogamescdn.com/asset/cc7606f/graphic/start2/bg-paladin.png" style="margin-left: 2%; margin-right:2%">
 
-<b-card bg-variant="dark" text-variant="white" title="Überproduktion bis zur letzten Ressource (in hh:mm)):">
+<b-card bg-variant="dark" text-variant="white" title="Überproduktion bis zur letzten Ressource:">
   <b-card-text>
         <table class="resultTable" style="width: 100%">
           <tr v-for="resource in result.overproduction" :key="resource.type">

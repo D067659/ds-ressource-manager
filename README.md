@@ -22,3 +22,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Deploymnet
+The DS Ressource Manager is hosted on a free heroku plan.
+The file ```static.json``` provides an entry point. Note that the ```index2.html``` does not exist, thereby the main vue file is loaded.
+Check out the live heroku app [here](https://ds-resource-manager.herokuapp.com/).

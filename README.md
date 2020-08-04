@@ -6,11 +6,10 @@
 
 <details>
   
-<summary>Show X</summary>
-  
-```
+<details><summary>Code</summary>
+
 npm install
-```
+npm run serve
 
 </details>
 

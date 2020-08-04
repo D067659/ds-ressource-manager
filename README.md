@@ -5,11 +5,13 @@
 
 
 <details>
-<summary>Show solution</summary>
+  
+<summary>Show X</summary>
   
 ```
 npm install
 ```
+
 </details>
 
 ## Project setup

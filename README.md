@@ -2,9 +2,6 @@
 ## Test
 ### Specific hierarchy test
 ### Dropdown Test setup
-
-
-<details>
   
 <details><summary>Code</summary>
 

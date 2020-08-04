@@ -5,7 +5,9 @@
   
 <details>
 <summary>One Last Test</summary>
-<pre>$ This dropdown contains<br>a code block!</pre>
+<pre>JSON BLock COde {
+gonna add: two }
+</pre>
 </details>
 
 ## Project setup

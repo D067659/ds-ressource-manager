@@ -3,13 +3,9 @@
 ### Specific hierarchy test
 ### Dropdown Test setup
   
-<details><summary>Code</summary>
-
-$input = '<script>alert(1);</script>';
-echo htmlspecialchars($input);
-echo htmlentities($input);
-?>
-
+<details>
+<summary>One Last Test</summary>
+<pre>$ This dropdown contains<br>a code block!</pre>
 </details>
 
 ## Project setup

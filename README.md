@@ -5,7 +5,9 @@
   
 <details><summary>Code</summary>
 
-npm run dev
+$input = '<script>alert(1);</script>';
+echo htmlspecialchars($input);
+echo htmlentities($input);
 ?>
 
 </details>

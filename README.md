@@ -1,4 +1,15 @@
 # ds-ressource-manager
+## Test
+### Specific hierarchy test
+### Dropdown Test setup
+
+
+<details>
+<summary>Show solution</summary>
+```
+npm install
+```
+</details>
 
 ## Project setup
 ```

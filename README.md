@@ -7,7 +7,8 @@
 <summary>One Last Test</summary>
 <br>
 Its me, Mario!
-<pre>{
+<pre>
+{
    "url_api_detail":"http://127.0.0.1:8001/services/manage_apis/ /",
    "id":" ",
    "function_name":"stock_price",

@@ -6,6 +6,7 @@
 
 <details>
 <summary>Show solution</summary>
+  
 ```
 npm install
 ```
